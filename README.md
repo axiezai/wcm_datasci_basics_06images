@@ -163,7 +163,7 @@ def realign_data(in_data, align = "max"):
         elif align == "center":
             # Write the alignment code here, replacing peak with the center that you found (mid_longest). 
     
-        return d, shifts
+    return d, shifts
 
 pd.concat()   # concatenate dataframes or series
 pd.read_csv() # read in csv files as dataframes, has a `.fillna()` method to deal with N/A entries
