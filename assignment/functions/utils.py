@@ -11,7 +11,7 @@ def find_middle(in_column):
     # round down with `floor` in case your middle point isn't divisible by 2 (odd length)
     return int(np.floor(middle))
 
-def realign_data(in_data, align = "max"):
+def realign_data(in_data, align):
     """
     Center data around maximum or center of shortest column, pad with 0's 
     Args:
@@ -43,9 +43,13 @@ def realign_data(in_data, align = "max"):
             assert np.argmax(d[column]) == peak_longest
             shifts[column] = pdiff
         elif align == "center":
-            # Write the alignment code here, replacing peak with the center that you found (mid_longest). 
-    
-        return d, shifts
+            # Write the alignment code here, replacing peak with the center that you found (mid_longest).
+            mid = find_middle(in_data[column].values)
+            pdiff = mid_longest - mid
+            d[column] = in_data[column].shift(periods=pdiff, fill_value=0)
+
+    return d, shifts
+
 # get_files function:
 import natsort
 import glob
