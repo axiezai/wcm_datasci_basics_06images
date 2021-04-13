@@ -1,6 +1,10 @@
 import glob
 import pandas as pd
 import numpy as np
+import natsort 
+import os 
+
+
 
 # Utility functions for processing .csv data in assignment 6
 def get_files(path_pattern):
@@ -9,11 +13,21 @@ def get_files(path_pattern):
 
 # get_files function:
 def get_files1(path_pattern):
-    return glob.glob(path_pattern)
+    
+    if isinstance(path_pattern, list):
+        path_pattern = os.path.join(*path_pattern) 
+
+    files = natsort.natsorted(glob.glob(path_pattern))
+
+    return files
+
 
 def find_middle(in_column):
     """
-    Find the middle index of input data column/array
+    Find the middle index 
+    
+    Args: 
+        in_column ([type]): [array or dataframe column]
     """
     # length of the input, divide by 2 to find the middle point
     middle = float(len(in_column))/2
@@ -64,4 +78,3 @@ def realign_data(in_data, align = "max"):
     return d, shifts
 
 
-    
